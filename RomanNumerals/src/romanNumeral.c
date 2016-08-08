@@ -6,6 +6,7 @@
  */
 #include "romanNumeral.h"
 
+int RomanNumeral_New(char*);
 int add(char* firstNumber, char* secondNumber)
 {
 	// protect against char buffer overrun
