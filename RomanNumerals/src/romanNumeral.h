@@ -8,12 +8,19 @@
 #ifndef ROMANNUMERAL_H_
 #define ROMANNUMERAL_H_
 
+#define NULL 0
+#define MAX_WIDTH  50
+
 // base structure for
-// all parts of the number
+// all parts of the Numeral
+// with number equivalents
 typedef struct {
-	const char* text;
-	int value;
-} number;
+	char text[MAX_WIDTH];
+	unsigned value;
+} Numeral;
+
+Numeral* numeral_new();
+
 
 
 #endif /* ROMANNUMERAL_H_ */

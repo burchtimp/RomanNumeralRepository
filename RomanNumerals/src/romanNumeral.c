@@ -5,8 +5,20 @@
  *      Author: tburch
  */
 #include "romanNumeral.h"
+#include <stdlib.h>
+#include <string.h>
 
-int RomanNumeral_New(char*);
+Numeral* numeral_new()
+{
+	Numeral* aNumeral = (Numeral*) malloc(sizeof(Numeral));
+	if (aNumeral != NULL)
+	{
+		strncpy(aNumeral->text,"", sizeof(aNumeral->text));
+		aNumeral->value = 0;
+	}
+	return aNumeral;
+}
+
 int add(char* firstNumber, char* secondNumber)
 {
 	// protect against char buffer overrun
