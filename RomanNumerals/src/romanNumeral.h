@@ -8,7 +8,6 @@
 #ifndef ROMANNUMERAL_H_
 #define ROMANNUMERAL_H_
 
-#define NULL 0
 #define MAX_WIDTH  50
 
 // base structure for
