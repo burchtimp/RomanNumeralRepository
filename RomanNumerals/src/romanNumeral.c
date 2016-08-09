@@ -13,7 +13,7 @@ Numeral* numeral_new()
 	Numeral* aNumeral = (Numeral*) malloc(sizeof(Numeral));
 	if (aNumeral != NULL)
 	{
-		strncpy(aNumeral->text,"", sizeof(aNumeral->text));
+		memset(aNumeral->text, 0, sizeof(aNumeral->text));
 		aNumeral->value = 0;
 	}
 	return aNumeral;
