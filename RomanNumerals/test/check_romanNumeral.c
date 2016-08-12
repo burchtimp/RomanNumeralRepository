@@ -6,6 +6,7 @@
  */
 #include <check.h>
 #include "../src/romanNumeral.h"
+#include "check_romanNumeral.h"
 #include <stdlib.h>
 
 START_TEST(test_romanNumeral_new)
