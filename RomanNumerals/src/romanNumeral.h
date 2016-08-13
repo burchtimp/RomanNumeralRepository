@@ -8,10 +8,8 @@
 #ifndef ROMANNUMERAL_H_
 #define ROMANNUMERAL_H_
 
-#define MAX_WIDTH  50
+#define MAX_WIDTH  15 // based on the longest value: MMMDCCCLXXXVIII
 #define ERR_WIDTH  25
-#define NUM_ERRORS 4
-
 
 extern const int MaximumValue;
 
@@ -27,7 +25,7 @@ typedef struct {
 
 // Errors
 typedef enum returnCodes {
-	NON_NULL_TERM_STRING = -1,
+	STRING_TOO_LONG = -1,
 	INVALID_TEXT = -2,
 	VALUE_OVERFLOW = -3,
 	NEGATIVE_VALUE = -4,

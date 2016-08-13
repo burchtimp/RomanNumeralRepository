@@ -1,9 +1,9 @@
 #ifndef CHECK_ROMANNUMERAL_H_
 #define CHECK_ROMANNUMERAL_H_
 
-#define MAX_VALID_CASES 3999
+#define MAX_VALID_CASES 4000
 
-const char *validTestCases[MAX_VALID_CASES] = { "I", "II", "III", "IV", "V", "VI", "VII",
+const char *validTestCases[MAX_VALID_CASES] = { "", "I", "II", "III", "IV", "V", "VI", "VII",
 		"VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII",
 		"XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI",
 		"XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV",

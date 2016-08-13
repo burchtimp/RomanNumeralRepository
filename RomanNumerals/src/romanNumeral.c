@@ -14,13 +14,13 @@
 // Return code strings
 static const char* const retDesc[] =
 {
-		"Success",
-		"Could not determine length of input string.",
-		"Numeral does not contain a valid Roman Numeral.",
-		"Sum is greater than maximum value.",
-		"Difference is less than 0.",
-		"Argument is null.",
-		"regcomp returned error."
+	"Success",
+	"Could not determine length of input string.",
+	"Numeral does not contain a valid Roman Numeral.",
+	"Sum is greater than maximum value.",
+	"Difference is less than 0.",
+	"Argument is null.",
+	"regcomp returned error."
 };
 const char* getRetCodeDesc(NumeralReturnCode retCode)
 {
@@ -70,14 +70,16 @@ static int IsPointerValid(Numeral* numeralToCheck)
 		returnCode = INVALID_PTR;
 	}
 
+
 	return returnCode;
 }
 static int IsStringLenValid(Numeral* numeralToCheck)
 {
 	int returnCode = EXIT_SUCCESS;
-	if (strlen(numeralToCheck->text) <0 )
+	int length = strlen(numeralToCheck->text);
+	if (length < 0 || length > MAX_WIDTH)
 	{
-		returnCode = NON_NULL_TERM_STRING;
+		returnCode = STRING_TOO_LONG;
 	}
 	return returnCode;
 }
@@ -99,7 +101,7 @@ static int ValidateText(Numeral* numeralToCheck)
 		index++;
 	}
 
-	// "construct" regex object
+	// "construct" regex objecco
 	returnCode = regcomp(&regex, ValidationRegEx, REG_NOSUB | REG_EXTENDED);
 	if (returnCode )
 	{
@@ -135,7 +137,7 @@ static int ValidateNumeral(Numeral* instance) {
 	return returnCode;
 }
 
-int calculate(Numeral* first, Numeral* second, CalculationMode mode, int* answer) {
+static int calculate(Numeral* first, Numeral* second, CalculationMode mode, int* answer) {
 	// Validate the Numerals
 	int returnCode = ValidateNumeral(first);
 	if (returnCode == EXIT_SUCCESS) {
@@ -144,19 +146,22 @@ int calculate(Numeral* first, Numeral* second, CalculationMode mode, int* answer
 	if (returnCode == EXIT_SUCCESS && answer == NULL) {
 		returnCode = EXIT_FAILURE;
 	}
-	// Convert the Numeral to unsigned integer
-
-	// Perform the final calculation FINALLY!
-	int firstValue = first->value;
-	int secondValue = second->value;
-	if (mode == SUBTRACT)
+	if (returnCode == EXIT_SUCCESS)
 	{
-		secondValue = -secondValue;
+		// Convert the Numeral to unsigned integer
+
+		// Perform the final calculation FINALLY!
+		int firstValue = first->value;
+		int secondValue = second->value;
+		if (mode == SUBTRACT)
+		{
+			secondValue = -secondValue;
+		}
+
+		(*answer) = firstValue + secondValue;
+
+		// verify that we don't exceed the max number (3999) or go less than 0
 	}
-
-	(*answer) = firstValue + secondValue;
-
-	// verify that we don't exceed the max number (3999) or go less than 0
 	return returnCode;
 }
 
