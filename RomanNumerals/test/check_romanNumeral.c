@@ -81,4 +81,15 @@ int main(void)
     srunner_free(suiteRunner);
 
     return numberFailed == 0 ? 0 : 1;
+//	Numeral *m = numeral_new();
+//
+//	char valid[] = "MMMDCCCLXIII";
+//	strncpy (m->text, valid, sizeof(valid));
+//	Numeral *second = numeral_new();
+//	strncpy(second->text, validTestCases[1], strlen(validTestCases[0]));
+//	int sum = 0;
+//	NumeralReturnCode retCode = add(m, second, &sum);
+//	ck_assert_int_eq((int)retCode, STRING_TOO_LONG);
+//	free(m);
+	return 0;
 }
