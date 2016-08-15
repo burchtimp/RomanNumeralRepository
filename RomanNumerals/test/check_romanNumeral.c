@@ -1,6 +1,7 @@
 /*
  * check_romanNumeral.c
- *
+ *  Purpose:
+ *  		Check Unit test framework for Roman numeral objects.
  *  Created on: Aug 6, 2016
  *      Author: tburch
  */

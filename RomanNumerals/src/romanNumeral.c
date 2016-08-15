@@ -1,5 +1,17 @@
 /*
  * romanNumeral.c
+ *  Purpose:
+ *  		Add an subtract Roman numeral objects.
+ *  Usage:
+ *  		Create an instance of the Numeral type object by calling the numeral_new() function.
+ *  		Assign a RomanNumeral string to the text member. Multiple objects can be added/subtracted.
+ *  Synopsis:
+ *  		NumeralReturnCode add(Numeral* first, Numeral* second, int* sum);
+ *  			Add two objects together, the answer is written to a provided int*
+ *  		NumeralReturnCode subtract(Numeral* first, Numeral* second, int* difference);
+ *  			Subtract two objects from one another, the answer is written to a provided int*
+ *
+ *
  *
  *  Created on: Aug 6, 2016
  *      Author: tburch
@@ -56,7 +68,7 @@ Numeral* numeral_new()
 	}
 	return aNumeral;
 }
-// private to verify that the pointer isn't NULL
+// private method to verify that the pointer isn't NULL
 static int IsPointerValid(Numeral* numeralToCheck)
 {
 	int returnCode = EXIT_SUCCESS;
@@ -67,7 +79,7 @@ static int IsPointerValid(Numeral* numeralToCheck)
 
 	return returnCode;
 }
-// private method to verify that the string copied isn't too long
+// private method to verify that the string copied doesn't exceed our storage limit.
 static int IsStringLenValid(Numeral* numeralToCheck)
 {
 	int returnCode = EXIT_SUCCESS;
@@ -229,12 +241,12 @@ static int calculate(Numeral* first, Numeral* second, CalculationMode mode,
 	}
 	return returnCode;
 }
-
+// public method to add two Roman numerals.  The answer is provided in the sum pointer.
 NumeralReturnCode add(Numeral* first, Numeral* second, int* sum)
 {
 	return calculate(first, second, ADD, sum);
 }
-
+// public method to subtract two Roman numerals. The answer is proved in the difference pointer.
 NumeralReturnCode subtract(Numeral* first, Numeral* second, int* difference)
 {
 	return calculate(first, second, SUBTRACT, difference);

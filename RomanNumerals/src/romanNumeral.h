@@ -1,5 +1,17 @@
 /*
  * romanNumeral.h
+ *  Purpose:
+ *  		Add an subtract Roman numeral objects.
+ *  Usage:
+ *  		Create an instance of the Numeral type object by calling the numeral_new() function.
+ *  		Assign a RomanNumeral string to the text member. Multiple objects can be added/subtracted.
+ *  Synopsis:
+ *  		NumeralReturnCode add(Numeral* first, Numeral* second, int* sum);
+ *  			Add two objects together, the answer is written to a provided int*
+ *  		NumeralReturnCode subtract(Numeral* first, Numeral* second, int* difference);
+ *  			Subtract two objects from one another, the answer is written to a provided int*
+ *
+ *
  *
  *  Created on: Aug 6, 2016
  *      Author: tburch
