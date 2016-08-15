@@ -14,10 +14,10 @@
 // Return code strings
 static const char* const retDesc[] =
 {
-		"Success", "Could not determine length of input string.",
+		"Success", "Length of input string exceeds storage limit.",
 		"Numeral does not contain a valid Roman Numeral.",
 		"Sum is greater than maximum value.", "Difference is less than 0.",
-		"Argument is null.", "regcomp returned error." };
+		"Argument is null."};
 // Helper method to return Error Codes
 const char* getRetCodeDesc(NumeralReturnCode retCode)
 {
@@ -91,10 +91,6 @@ static int ValidateText(Numeral* numeralToCheck)
 
 	// "construct" regex object
 	returnCode = regcomp(&regex, ValidationRegEx, REG_NOSUB | REG_EXTENDED);
-	if (returnCode)
-	{
-		returnCode = REGEX_ERROR;
-	}
 
 	if (returnCode == EXIT_SUCCESS
 			&& regexec(&regex, strToCheck, 0, NULL, 0) == REG_NOMATCH)
@@ -135,7 +131,7 @@ int removeSubString(char* stringToCut, size_t removePosition, size_t subStringle
 	size_t length = strlen(stringToCut);
 
 	// We can't remove anything passed the end of the string
-	if (removePosition > length)
+	if (removePosition > length || removePosition < 0)
 	{
 		returnCode = EXIT_FAILURE;
 	}
@@ -161,12 +157,15 @@ static int convertNumeralTextValue(Numeral* theNumeral)
 	int index = 0;
 	char localCopy[MAX_WIDTH] = { 0 };
 	strncpy(&localCopy[0], theNumeral->text, MAX_WIDTH);
+	// for every symbol in our array
 	for (index = 0;	index < (sizeof(NumeralSymbols) / sizeof(NumeralSymbols[0])); index++)
 	{
+		// Look for that symbol in our Numeral Text
 		char* symbol = strstr(&localCopy[0], NumeralSymbols[index]);
 		// if not null, we have a match!
 		if (symbol != NULL)
 		{
+			// Add the equivalent value to our accumulator
 			answer += NumberEquivalents[index];
 			// remove this symbol from the local copy
 			size_t position = symbol - localCopy;
@@ -178,6 +177,7 @@ static int convertNumeralTextValue(Numeral* theNumeral)
 			}
 		}
 	}
+	// Copy the final answer back to the numeral
 	theNumeral->value = answer;
 	return returnCode;
 }
@@ -213,6 +213,14 @@ static int calculate(Numeral* first, Numeral* second, CalculationMode mode,
 			(*answer) = firstValue + secondValue;
 
 			// verify that we don't exceed the max number (3999) or go less than 0
+			if (*answer > MaximumValue  )
+			{
+				returnCode = VALUE_OVERFLOW;
+			}
+			else if(*answer < 0)
+			{
+				returnCode = NEGATIVE_VALUE;
+			}
 		}
 		else
 		{
@@ -229,8 +237,5 @@ NumeralReturnCode add(Numeral* first, Numeral* second, int* sum)
 
 NumeralReturnCode subtract(Numeral* first, Numeral* second, int* difference)
 {
-	// verify that the first number is greater than the second number
 	return calculate(first, second, SUBTRACT, difference);
-
-	return 0;
 }

@@ -13,7 +13,6 @@
 #define ERR_WIDTH  25
 
 extern const int MaximumValue;
-
 // Type for all parts of the Numeral
 // with unsigned integer equivalents
 typedef struct {
@@ -23,12 +22,11 @@ typedef struct {
 
 // Errors
 typedef enum returnCodes {
-	STRING_TOO_LONG = -1,
-	INVALID_TEXT = -2,
-	VALUE_OVERFLOW = -3,
-	NEGATIVE_VALUE = -4,
-	INVALID_PTR = -5,
-	REGEX_ERROR = -6
+	STRING_TOO_LONG = 1,
+	INVALID_TEXT = 2,
+	VALUE_OVERFLOW = 3,
+	NEGATIVE_VALUE = 4,
+	INVALID_PTR = 5
 } NumeralReturnCode;
 
 const char* getRetCodeDesc(NumeralReturnCode retCode);

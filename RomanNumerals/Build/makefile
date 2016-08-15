@@ -30,7 +30,7 @@ all: RomanNumerals
 RomanNumerals: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -pthread -o "RomanNumerals" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -pthread -fprofile-arcs -o "RomanNumerals" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
